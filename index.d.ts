@@ -402,15 +402,9 @@ export interface RequestLog {
 export interface RequestQuery {
     [key: string]: any;
 }
-/**
- * Default request references. Used to give typing to requests,
- * route handlers, lifecycle methods, auth credentials, etc.
- * This can be overwritten to whatever is suitable and universal
- * in your specific app, but whatever references you pass to
- * server route generic, or lifecycle methods will take precedence
- * over these.
- */
-export interface ReqRefDefaults {
+
+
+export interface InternalRequestDefaults {
     Payload: stream.Readable | Buffer | string | object;
     Query: RequestQuery;
     Params: Util.Dictionary<any>;
@@ -427,6 +421,16 @@ export interface ReqRefDefaults {
     Rules: RouteRules;
     Bind: object | null;
 }
+
+/**
+ * Default request references. Used to give typing to requests,
+ * route handlers, lifecycle methods, auth credentials, etc.
+ * This can be overwritten to whatever is suitable and universal
+ * in your specific app, but whatever references you pass to
+ * server route generic, or lifecycle methods will take precedence
+ * over these.
+ */
+export interface ReqRefDefaults extends InternalRequestDefaults {};
 
 /**
  * Route request overrides
@@ -3309,7 +3313,7 @@ export interface RulesInfo {
 
 export interface RulesOptions<Refs extends ReqRef = ReqRefDefaults> {
     validate: {
-        schema?: ObjectSchema<MergeRefs<Refs>['Rules']>;
+        schema?: ObjectSchema<MergeRefs<Refs>['Rules']> | Record<keyof MergeRefs<Refs>['Rules'], Schema>;
         options?: ValidationOptions;
     };
 }
