@@ -73,7 +73,11 @@ export declare namespace HapiJwt {
 
     type Key = StandardKey | JWKSKey;
 
-    interface DecodedToken {
+    interface JwtRefs {
+        JwtPayload?: any
+    }
+
+    interface DecodedToken<Refs extends JwtRefs = JwtRefs> {
         /**
          * An object that contain the header information.
          */
@@ -90,7 +94,7 @@ export declare namespace HapiJwt {
         /**
          *  An object containing the payload.
          */
-        payload: any;
+        payload: Refs['JwtPayload'];
         /**
          *  The signature string of the token.
          */
@@ -112,7 +116,8 @@ export declare namespace HapiJwt {
         signature: string;
     }
 
-    interface Artifacts {
+
+    interface Artifacts<Refs = JwtRefs> {
         /**
          * The complete token that was sent.
          */
@@ -120,7 +125,7 @@ export declare namespace HapiJwt {
         /**
          * An object that contains decoded token.
          */
-        decoded: DecodedToken;
+        decoded: DecodedToken<Refs>;
         /**
          * An object that contains the token that was sent broken out by header, payload, and signature.
          */
@@ -179,6 +184,14 @@ export declare namespace HapiJwt {
         response?: ResponseObject | undefined;
     }
 
+    interface OptionsValidateFunction {
+        <Refs extends ReqRef & JwtRefs = ReqRefDefaults & JwtRefs>(
+            artifacts: Artifacts<Refs>,
+            request: Request<Refs>,
+            h: ResponseToolkit<Refs>
+        ): Promise<ValidationResult> | never
+    }
+
     interface Options {
         /**
          * The key method to be used for jwt verification.
@@ -203,13 +216,7 @@ export declare namespace HapiJwt {
          * @param request the hapi request object of the request which is being authenticated.
          * @param h the response toolkit.
          */
-        validate:(
-            <Refs = ReqRefDefaults>(
-                artifacts: Artifacts,
-                request: Request<Refs>,
-                h: ResponseToolkit<Refs>
-            ) => Promise<ValidationResult> | never
-        ) | false;
+        validate: OptionsValidateFunction | false;
     }
 
     // Token definitions
