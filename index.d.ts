@@ -2313,7 +2313,7 @@ export interface ServerAuth {
      * are still valid (e.g. have not been revoked or expired). It does not include verifying scope,
      * entity, or other route properties.
      */
-    verify(request: Request): Promise<void>;
+    verify <Refs = ReqRefDefaults>(request: Request<Refs>): Promise<void>;
 }
 
 export type CachePolicyOptions<T> = PolicyOptionVariants<T> & {
