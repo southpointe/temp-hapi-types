@@ -184,8 +184,8 @@ export declare namespace HapiJwt {
         response?: ResponseObject | undefined;
     }
 
-    interface OptionsValidateFunction {
-        <Refs extends ReqRef & JwtRefs = ReqRefDefaults & JwtRefs>(
+    interface OptionsValidateFunction<Refs extends ReqRef & JwtRefs = ReqRefDefaults & JwtRefs> {
+        (
             artifacts: Artifacts<Refs>,
             request: Request<Refs>,
             h: ResponseToolkit<Refs>
