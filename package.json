@@ -1,18 +1,5 @@
 {
-  "name": "@types/hapi__hapi",
-  "version": "20.0.10-types.0",
-  "main": "",
-  "types": "index.d.ts",
-  "repository": "git@github.com:southpointe/temp-hapi-types.git",
-  "license": "MIT",
   "dependencies": {
-    "@hapi/boom": "^9.0.0",
-    "@hapi/iron": "^6.0.0",
-    "@hapi/podium": "^4.1.3",
-    "@types/hapi__catbox": "*",
-    "@types/hapi__mimos": "*",
-    "@types/hapi__shot": "*",
-    "@types/node": "*",
-    "joi": "^17.3.0"
+    "typescript": "^4.6.3"
   }
 }
