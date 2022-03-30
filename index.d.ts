@@ -2865,12 +2865,12 @@ export interface ServerInjectOptions extends Shot.RequestOptions {
  * For context [See docs](https://github.com/hapijs/hapi/blob/master/API.md#-await-serverinjectoptions)
  * For context [Shot module](https://github.com/hapijs/shot)
  */
-export interface ServerInjectResponse extends Shot.ResponseObject {
+export interface ServerInjectResponse<Result = object> extends Shot.ResponseObject {
     /**
      * the raw handler response (e.g. when not a stream or a view) before it is serialized for transmission. If not available, the value is set to payload. Useful for inspection and reuse of the
      * internal objects returned (instead of parsing the response string).
      */
-    result: object | undefined;
+    result: Result | undefined;
     /**
      * the request object.
      */
@@ -3918,7 +3918,7 @@ export class Server {
      * * request - the request object.
      * [See docs](https://github.com/hapijs/hapi/blob/master/API.md#-await-serverinjectoptions)
      */
-    inject(options: string | ServerInjectOptions): Promise<ServerInjectResponse>;
+    inject <Result = object>(options: string | ServerInjectOptions): Promise<ServerInjectResponse<Result>>;
 
     /**
      * Logs server events that cannot be associated with a specific request. When called the server emits a 'log' event which can be used by other listeners or plugins to record the information or
