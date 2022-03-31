@@ -181,7 +181,7 @@ export declare namespace HapiJwt {
         /**
          * Will be used immediately as a takeover response. isValid and credentials are ignored if provided.
          */
-        response?: ResponseObject | undefined;
+        response?: ResponseObject | Error | undefined;
     }
 
     interface OptionsValidateFunction<Refs extends ReqRef & JwtRefs = ReqRefDefaults & JwtRefs> {
