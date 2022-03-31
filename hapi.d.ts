@@ -430,7 +430,7 @@ export interface InternalRequestDefaults {
  * server route generic, or lifecycle methods will take precedence
  * over these.
  */
-export interface ReqRefDefaults extends InternalRequestDefaults {};
+export interface ReqRefDefaults extends InternalRequestDefaults {}
 
 /**
  * Route request overrides
@@ -1228,7 +1228,8 @@ export interface ResponseToolkit<Refs extends ReqRef = ReqRefDefaults> {
  *      Scope: 'user' | 'admin' | 'manager-users'
  * }
  */
-export interface RouteOptionTypes {}
+export interface RouteOptionTypes {
+}
 
 export interface InternalRouteOptionType {
     Strategy: string;
@@ -2289,7 +2290,11 @@ export interface ServerAuth {
      * @return Return value: none.
      * [See docs](https://github.com/hapijs/hapi/blob/master/API.md#-serverauthstrategyname-scheme-options)
      */
-    strategy(name: string, scheme: string, options?: object): void;
+    strategy(
+        name: MergeType<InternalRouteOptionType, RouteOptionTypes>['Strategy'],
+        scheme: string,
+        options?: object
+    ): void;
 
     /**
      * Tests a request against an authentication strategy where:
