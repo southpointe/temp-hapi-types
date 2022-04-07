@@ -49,3 +49,16 @@ npm install
 yarn
 
 ```
+
+## Things to take note of
+
+- There is the concept of [Request Reference Defaults](https://github.com/southpointe/temp-hapi-types/blob/master/hapi.d.ts#L433) which aims to give you the ability to extend its types as the set default for all requests.
+- [Request are generic](https://github.com/southpointe/temp-hapi-types/blob/master/hapi.d.ts#L451) and are set to the defaults if none is passed. They can be overriden piece meal, and it will not affect the other defaults. Whatever you pass into that generic will be favored over the defaults
+- In a similar fasion, [lifecycle methods](https://github.com/southpointe/temp-hapi-types/blob/master/hapi.d.ts#L4196) are also generic, and are passed down generics from request, toolkit, and such
+- The following also have generics and should be subject to review:
+  - [ResponseToolkit](https://github.com/southpointe/temp-hapi-types/blob/master/hapi.d.ts#L1060)
+  - [RouteOptionsPreArray](https://github.com/southpointe/temp-hapi-types/blob/master/hapi.d.ts#L1539) and subsequent lines
+  - [RouteOptions](https://github.com/southpointe/temp-hapi-types/blob/master/hapi.d.ts#L2117)
+  - [ServerAuthScheme](https://github.com/southpointe/temp-hapi-types/blob/master/hapi.d.ts#L2150) and subsequent lines
+  - [RouteExtObject](https://github.com/southpointe/temp-hapi-types/blob/master/hapi.d.ts#L2659)
+  - [ServerRoute](https://github.com/southpointe/temp-hapi-types/blob/master/hapi.d.ts#L3345)
