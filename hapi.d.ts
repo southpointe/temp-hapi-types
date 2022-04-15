@@ -4045,7 +4045,7 @@ export class Server {
      */
 
     // tslint:disable-next-line:no-unnecessary-generics
-    route <Refs extends ReqRef = ReqRefDefaults>(route: ServerRoute<Refs> | ServerRoute[]): void;
+    route <Refs extends ReqRef = ReqRefDefaults>(route: ServerRoute<Refs> | ServerRoute<Refs>[]): void;
 
     /**
      * Defines a route rules processor for converting route rules object into route configuration where:
